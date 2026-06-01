@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados PUI Regulares</title>
+    <title>UNIMET - Resultados PUI</title>
     <style>
         * {
             box-sizing: border-box;
@@ -25,23 +25,39 @@
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            padding: 40px 30px;
+            padding: 35px 25px;
             width: 100%;
             max-width: 450px;
             text-align: center;
         }
 
+        /* Contenedor del Logo de la UNIMET */
+        .logo-unimet {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
         h1 {
-            color: #003366; /* Azul institucional */
+            color: #003366; /* Azul UNIMET */
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 4px;
+        }
+
+        .trimestre {
+            color: #e06613; /* Naranja UNIMET */
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         p.instruction {
             color: #666666;
             font-size: 14px;
-            line-height: 1.4;
+            line-height: 1.5;
             margin-bottom: 25px;
         }
 
@@ -53,6 +69,7 @@
             font-size: 16px;
             margin-bottom: 18px;
             outline: none;
+            text-align: center;
             transition: border-color 0.2s;
         }
 
@@ -62,7 +79,7 @@
 
         button {
             width: 100%;
-            background-color: #e06613; /* Naranja idéntico a la imagen */
+            background-color: #e06613; /* Naranja corporativo */
             color: white;
             border: none;
             padding: 14px;
@@ -87,7 +104,7 @@
         }
 
         .success {
-            background-color: #e8f5e9; /* Verde claro */
+            background-color: #e8f5e9; /* Cuadro verde de la captura */
             border: 1px solid #c8e6c9;
             color: #1b5e20;
             font-weight: 700;
@@ -104,7 +121,12 @@
 <body>
 
 <div class="container">
+    <!-- Logo Oficial de la UNIMET -->
+    <img src="https://www.unimet.edu.ve/unimet/wp-content/uploads/2022/10/logo-unimet-horizontal.png" alt="Logo UNIMET" class="logo-unimet">
+    
     <h1>Resultados PUI Regulares</h1>
+    <div class="trimestre">Trimestre 2526-3</div>
+    
     <p class="instruction">Ingresa tu número de cédula para consultar<br>tu nivel asignado.</p>
     
     <input type="text" id="cedulaInput" placeholder="Ej: 30408011" onkeypress="handleKeyPress(event)">
@@ -114,7 +136,7 @@
 </div>
 
 <script>
-    // Base de datos extraída directamente de 'Resultados PUI 20 Feb Regulares.xlsx'
+    // Base de datos de estudiantes
     const listaResultados = {
       "13444751": "Inglés I",
       "32695949": "Inglés I",
@@ -171,7 +193,7 @@
         const input = document.getElementById('cedulaInput').value.trim();
         const resultDiv = document.getElementById('result');
         
-        // Limpiar puntos o guiones si el estudiante los escribe por costumbre
+        // Elimina puntos o guiones automáticamente por si acaso
         const cedulaLimpia = input.replace(/\./g, '').replace(/-/g, '');
 
         if (cedulaLimpia === "") {
@@ -186,13 +208,13 @@
             resultDiv.className = "result-box success";
             
             if(nivel.toLowerCase() === "exento") {
-                resultDiv.innerHTML = "Resultado de tu consulta:<br><span style='font-size: 20px;'>Te encuentras: EXENTO</span>";
+                resultDiv.innerHTML = "Resultado de tu consulta:<br><span style='font-size: 20px; display:block; margin-top:5px;'>Te encuentras: <strong>EXENTO</strong></span>";
             } else {
-                resultDiv.innerHTML = "Te corresponde cursar:<br><span style='font-size: 22px; display:block; margin-top:5px;'>" + nivel + "</span>";
+                resultDiv.innerHTML = "Te corresponde cursar:<br><span style='font-size: 22px; display:block; margin-top:5px;'><strong>" + nivel + "</strong></span>";
             }
         } else {
             resultDiv.className = "result-box error";
-            resultDiv.innerHTML = "Cédula no encontrada. Verifica el número o comunícate con el departamento.";
+            resultDiv.innerHTML = "Cédula no encontrada. Por favor, verifica el número o comunícate con el Departamento de Inglés.";
         }
         
         resultDiv.style.display = "block";
